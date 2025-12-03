@@ -32,7 +32,7 @@ efectiva:
 3. ¿Cómo puede Cyclistic utilizar los medios digitales para influir en que los usuarios ocasionales
  se conviertan en miembros? 
 
-Este caso de estudio se centrará puntualmente en la primera pregunta del proyecto.
+Este caso de estudio se centrará puntualmente en la primera pregunta.
 
 ________________________________________________________
 ## BUSINESS TASK: 
@@ -57,6 +57,7 @@ horas. Al no poder determinarse si se trataban de errores o bien casos aislados,
 muestra de manera tal que solo se contemplen en el análisis viajes que se encuentren dentro de 
 determinados parámetros. Si bien podrían existir viajes de mayor duración, se determinó como criterio
  para el análisis únicamente viajes que no superen las 12 horas. 
+ 
 A continuación, realizaremos una comparación entre la muestra original y la muestra reducida para 
 demostrar que la reducción no significa un cambio que pueda afectar al estudio en cuestión. 
 
