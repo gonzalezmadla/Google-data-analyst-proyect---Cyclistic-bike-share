@@ -31,6 +31,7 @@ efectiva:
 2. ¿Por qué los usuarios ocasionales deberían adquirir una membresía anual? 
 3. ¿Cómo puede Cyclistic utilizar los medios digitales para influir en que los usuarios ocasionales
  se conviertan en miembros? 
+
 Este caso de estudio se centrará puntualmente en la primera pregunta del proyecto.
 
 ________________________________________________________
@@ -45,6 +46,9 @@ el universo de datos era demasiado extenso, se tomaron únicamente dos trimestre
 largo del tiempo. Cabe mencionar que los datos provienen de Motivate International Inc. bajo licencia 
 pública y no contienen información personal identificable, lo que garantiza el cumplimiento de los 
 requisitos de privacidad del caso. 
+
+Además, los conjuntos de datos utilizados pueden consultarse públicamente en el siguiente enlace: 
+https://www.kaggle.com/datasets/vipulgohel/cyclistic-bikeshare-analysis-case-study
 
 ## Composición de la Muestra 
 En este caso de estudio, se utilizó la información histórica correspondiente al primer trimestre de 2019 
@@ -66,8 +70,9 @@ library(ggplot2)
 ```
 ``` r
 #Importa archivos csv
-Q1_2019 <- read_csv("/kaggle/input/datos-pblicos-de-motivate-international-inc/Divvy_Trips_2019_Q1 - Divvy_Trips_2019_Q1.csv")
-Q1_2020 <- read_csv("/kaggle/input/datos-pblicos-de-motivate-international-inc/Divvy_Trips_2020_Q1 - Divvy_Trips_2020_Q1.csv")
+Q1_2019 <- read.csv("data/Divvy_Trips_2019_Q1.csv")
+Q1_2020 <- read.csv("data/Divvy_Trips_2020_Q1.csv")
+
 ```
 ```r
 #Lista cuadros para control
@@ -87,18 +92,38 @@ Q1_2019 <- Q1_2019 %>%
     end_station_name = to_station_name,
     member_casual = usertype
   )
-  ```
-  ``` r
-  #Selecciona columnas que se utilizaran para el analisis
+```
+``` r
+#Selecciona columnas que se utilizaran para el analisis
 Q1_2019v2 <- Q1_2019 %>% 
-  select(ride_id, started_at , ended_at, start_station_id, start_station_name, end_station_id, end_station_name, member_casual )
+    select(
+      ride_id, 
+      started_at, 
+      ended_at,
+      start_station_id, 
+      start_station_name, 
+      end_station_id, 
+      end_station_name, 
+      member_casual)
 Q1_2020v2 <- Q1_2020 %>% 
-  select(ride_id, started_at , ended_at, start_station_id, start_station_name, end_station_id, end_station_name, member_casual )
-
+    select(
+      ride_id, 
+      started_at , 
+      ended_at, 
+      start_station_id, 
+      start_station_name, 
+      end_station_id, 
+      end_station_name, 
+      member_casual )
+```
+```r
 #Unifica criterios
-Q1_2019v2 <- Q1_2019v2 %>% mutate(ride_id = as.character(ride_id))
-Q1_2020v2 <- Q1_2020v2 %>% mutate(ride_id = as.character(ride_id))
-
+Q1_2019v2 <- Q1_2019v2 %>% 
+    mutate(ride_id = as.character(ride_id))
+Q1_2020v2 <- Q1_2020v2 %>% 
+    mutate(ride_id = as.character(ride_id))
+```
+```r
 #Lista cuadros para control
 head(Q1_2019v2)
 head(Q1_2020v2)
@@ -113,9 +138,11 @@ head(all_trips)
 ```r
 #Unifica criterios
 all_trips <- all_trips %>%
-  mutate(member_casual = recode(member_casual,
-                                "Subscriber" = "member",
-                                "Customer" = "casual")) #unifica criterio de clasificacion de clientes
+  mutate(
+    member_casual = recode(member_casual, 
+    "Subscriber" = "member", "Customer" = "casual")) 
+```
+```r
 #Lista cuadro para control
 head(all_trips)
 ```
@@ -206,8 +233,9 @@ all_trips %>%
     max_ride = max(ride_length),
     trips = n()
   )
-  ```r
-  #Resumen estadístico para grafico nro 3
+```
+```r
+#Resumen estadístico para grafico nro 3
 summary_stats <- all_trips %>%
   group_by(member_casual) %>%
   summarise(
@@ -353,3 +381,5 @@ El detalle de los requerimientos, el análisis de la información, los gráficos
 [Descripcion y requerimientos del caso de estudio](./Case_Study_1_How_does_a_bike_share_navigate_speedy_success.pdf)
 
 [Resolucion caso de estudio](./Caso_de_estudio_Cyclistic_bike_share.pdf)
+
+[Base de datos](https://www.kaggle.com/datasets/vipulgohel/cyclistic-bikeshare-analysis-case-study)
